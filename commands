@@ -8,4 +8,6 @@ flutter packages pub run build_runner build
 
 dart pub global activate flutter_gen
 
+flutter run -d chrome --no-web-browser-launch
+
 

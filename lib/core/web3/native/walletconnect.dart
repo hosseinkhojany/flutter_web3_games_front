@@ -2,22 +2,18 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_web3_games/core/pubs/web3dart/crypto.dart';
-import 'package:flutter_web3_games/core/pubs/web3dart/src/crypto/sha3.dart';
 import 'package:flutter_web3_games/core/web3/constants.dart';
 import 'package:flutter_web3_games/view/widgets/app_dialog.dart';
 import 'package:flutter_web3_games/view/widgets/app_snackbar.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:web3dart/crypto.dart';
+import 'package:web3dart/web3dart.dart';
 
 import '../../pubs/wallectconnect/src/providers/ethereum_walletconnect_provider.dart';
 import '../../pubs/wallectconnect/src/session/peer_meta.dart';
 import '../../pubs/wallectconnect/src/session/session_status.dart';
 import '../../pubs/wallectconnect/src/walletconnect.dart';
-import '../../pubs/web3dart/generated/MoneyPool.g.dart';
-import '../../pubs/web3dart/src/crypto/hex.dart';
-import '../../pubs/web3dart/src/crypto/secp256k1.dart';
-import '../../pubs/web3dart/web3dart.dart';
 
 var connector = WalletConnect(
     bridge: 'https://bridge.walletconnect.org',
@@ -127,12 +123,12 @@ Future<void> joinGenesisPlayer(
 
       final credentials = WalletConnectEthereumCredentials(provider: provider);
 
-      final yourContract = MoneyPool(
-          address: EthereumAddress.fromHex(_session!.accounts[0]),
-          client: Web3Client('https://rpc-mumbai.maticvigil.com', Client()));
-
-      final result = await yourContract.GenesisPlayer(gameId,
-          credentials: credentials, transaction: transaction);
+      // final yourContract = MoneyPool(
+      //     address: EthereumAddress.fromHex(_session!.accounts[0]),
+      //     client: Web3Client('https://rpc-mumbai.maticvigil.com', Client()));
+      //
+      // final result = await yourContract.GenesisPlayer(gameId,
+      //     credentials: credentials, transaction: transaction);
       onPlayerCreatedTheGame.call(true);
     } on Exception catch (exp) {
       debugPrint(exp.toString());
@@ -160,12 +156,12 @@ Future<void> joinOtherPlayers(
       );
 
       final credentials = WalletConnectEthereumCredentials(provider: provider);
-      final yourContract = MoneyPool(
-          address: EthereumAddress.fromHex(_session!.accounts[0]),
-          client: Web3Client('https://rpc-mumbai.maticvigil.com', Client()));
-
-      final result = await yourContract.OtherPlayer(gameId,
-          credentials: credentials, transaction: transaction);
+      // final yourContract = MoneyPool(
+      //     address: EthereumAddress.fromHex(_session!.accounts[0]),
+      //     client: Web3Client('https://rpc-mumbai.maticvigil.com', Client()));
+      //
+      // final result = await yourContract.OtherPlayer(gameId,
+      //     credentials: credentials, transaction: transaction);
       onOtherPlayerJoinedTheGame.call(true);
     } on Exception catch (exp) {
       debugPrint(exp.toString());
@@ -186,9 +182,9 @@ Future<void> signNonce(
       await launchUrlString(_uri!, mode: LaunchMode.externalApplication);
       debugPrint(_uri!);
 
-      var k = SHA3(256, KECCAK_PADDING, 256);
-      k.update(utf8.encode(nonce));
-      var hash = k.digest();
+      // var k = SHA3(256, KECCAK_PADDING, 256);
+      // k.update(utf8.encode(nonce));
+      // var hash = k.digest();
 
       String sign = await provider.personalSign(message: nonce, address: walletAddress, password: '');
       debugPrint(sign);
@@ -232,6 +228,16 @@ class WalletConnectEthereumCredentials extends CustomTransactionSender {
   Future<MsgSignature> signToSignature(Uint8List payload,
       {int? chainId, bool isEIP1559 = false}) {
     // TODO: implement signToSignature
+    throw UnimplementedError();
+  }
+
+  @override
+  // TODO: implement address
+  EthereumAddress get address => throw UnimplementedError();
+
+  @override
+  MsgSignature signToEcSignature(Uint8List payload, {int? chainId, bool isEIP1559 = false}) {
+    // TODO: implement signToEcSignature
     throw UnimplementedError();
   }
 }

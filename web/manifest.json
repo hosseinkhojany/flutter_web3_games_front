@@ -1,6 +1,6 @@
 {
-    "name": "flutter_web3_games",
-    "short_name": "flutter_web3_games",
+    "name": "web3_games_front",
+    "short_name": "web3_games_front",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

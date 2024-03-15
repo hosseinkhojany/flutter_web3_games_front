@@ -150,7 +150,7 @@ class AppDialogs {
                         style: TextStyle(color: Colors.black, fontSize: 15),
                       ),
                     ),
-                    QrImage(data: qr, size: 380)
+                    QrImageView(data: qr, size: 380)
                   ],
                 ),
               ),
@@ -185,7 +185,7 @@ class AppDialogs {
                             style: TextStyle(color: Colors.black, fontSize: 15),
                           ),
                         ),
-                        QrImage(data: qr, size: 380)
+                        QrImageView(data: qr, size: 380)
                       ],
                     ),
                   ),

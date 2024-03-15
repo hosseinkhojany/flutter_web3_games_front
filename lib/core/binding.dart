@@ -16,9 +16,9 @@ class AppBinding implements Bindings {
   Dio _dio() {
     final options = BaseOptions(
       baseUrl: "http://localhost:5000/v1",
-      connectTimeout: 10000,
-      receiveTimeout: 10000,
-      sendTimeout: 10000,
+      connectTimeout: Duration(milliseconds: 10000),
+      receiveTimeout: Duration(milliseconds: 10000),
+      sendTimeout: Duration(milliseconds: 10000),
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Authorization': 'Bearer abcdxyz',
